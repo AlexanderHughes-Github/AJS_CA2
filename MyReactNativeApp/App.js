@@ -1,35 +1,29 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import LandingPage from './screens/LandingPage';
+import LoginScreen from './path/to/LoginScreen';
+import SignUpScreen from './path/to/SignUpScreen';  
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator();
 
-function AuthStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function MainTabs() {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="Feed" component={FeedScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
-    </Tab.Navigator>
-  );
-}
-
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
-      <AuthStack />
-      {/* Conditionally render AuthStack or MainTabs based on authentication status */}
+      <Stack.Navigator initialRouteName="Landing">
+        <Stack.Screen name="Landing" component={LandingPage} />
+      </Stack.Navigator>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+      </Stack.Navigator>
+      <Stack.Navigator initialRouteName="SignUp">
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+export default App;
+
+
 
