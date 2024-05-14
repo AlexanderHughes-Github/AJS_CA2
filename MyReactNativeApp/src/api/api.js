@@ -5,9 +5,14 @@ const api = axios.create({
 });
 
 // Students
-export const fetchStudents = () => {
-    return api.get('/students');
-  };
+export const fetchStudents = async () => {
+  try {
+    const response = await api.get('/students');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const fetchStudent = (id) => api.get(`/students/${id}`);
 export const createStudent = (student) => api.post('/students', student);
 export const updateStudent = (id, student) => api.put(`/students/${id}`, student);

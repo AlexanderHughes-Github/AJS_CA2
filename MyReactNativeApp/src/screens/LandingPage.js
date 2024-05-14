@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator } from 'react-native';
-import { fetchStudents } from '../api';  // Assuming fetchStudents is implemented in api.js
+import { View, Text, Button, ActivityIndicator, StyleSheet } from 'react-native';
+import { fetchStudents } from '../api/api';
 
 const LandingPage = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState(null);
+  const [students, setStudents] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchStudents().then(students => {
-      setData(students);
+    fetchStudents().then(data => {
+      setStudents(data);
       setLoading(false);
-    }).catch(error => {
-      console.error('Error fetching students:', error);
+    }).catch(err => {
+      setError('Failed to connect to backend: ' + err.message);
       setLoading(false);
     });
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {loading ? <ActivityIndicator /> : <Text>Fetched data successfully</Text>}
-      {/* Navigation buttons can be added here */}
+    <View style={styles.container}>
+      {loading ? (
+        <ActivityIndicator size="large" />
+      ) : error ? (
+        <Text style={styles.error}>{error}</Text>
+      ) : (
+        <Text style={styles.success}>Fetched {students.length} students successfully!</Text>
+      )}
+      {/* For adding navigation buttons or other content here */}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  error: {
+    color: 'red',
+  },
+  success: {
+    color: 'green',
+  }
+});
 
 export default LandingPage;
 
