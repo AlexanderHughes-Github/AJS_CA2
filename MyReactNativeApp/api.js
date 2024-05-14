@@ -5,7 +5,9 @@ const api = axios.create({
 });
 
 // Students
-export const fetchStudents = () => api.get('/students');
+export const fetchStudents = () => {
+    return api.get('/students');
+  };
 export const fetchStudent = (id) => api.get(`/students/${id}`);
 export const createStudent = (student) => api.post('/students', student);
 export const updateStudent = (id, student) => api.put(`/students/${id}`, student);
