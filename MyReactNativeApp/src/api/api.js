@@ -39,4 +39,15 @@ export const createStudentModule = (studentModule) => api.post('/studentModules'
 export const updateStudentModule = (id, studentModule) => api.put(`/studentModules/${id}`, studentModule);
 export const deleteStudentModule = (id) => api.delete(`/studentModules/${id}`);
 
+//Users
+export const register = async (userData) => {
+  try {
+    const response = await api.post('/users/register', userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const login = userData => api.post('/users/login', userData);
+
 export default api;

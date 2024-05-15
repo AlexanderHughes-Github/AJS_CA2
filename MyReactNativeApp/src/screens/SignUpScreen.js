@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { register } from '../api/api';
+import { Alert } from 'react-native';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 
 const SignUpScreen = ({ navigation }) => {
@@ -6,10 +8,20 @@ const SignUpScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSignUp = () => {
-    // API call for registering a new user 
-    console.log('Register attempt with:', email, password, confirmPassword);
-    // Navigate to login or directly to the app 
+  const handleSignUp = async () => {
+    try {
+        const data = await register({ email, password });
+        console.log('Registration successful:', data);
+        Alert.alert("Success", "You are registered successfully!");
+        navigation.navigate('Login');
+    } catch (error) {
+        console.error('Registration failed:', error);
+        if (error.response && error.response.data && error.response.data.msg) {
+            Alert.alert("Registration Failed", error.response.data.msg);
+        } else {
+            Alert.alert("Registration Failed", "An unexpected error occurred.");
+        }
+    }
   };
 
   return (

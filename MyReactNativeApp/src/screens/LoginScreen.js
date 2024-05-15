@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
+import { login } from '../api/api';
+import { Alert } from 'react-native';
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // API call for logging in 
-    console.log('Login attempt with:', email, password);
-    // After successful login, navigate to another screen
+  const handleLogin = async () => {
+    console.log('Submitting:', { email, password });  // Log submission data
+    try {
+        const data = await login({ email, password });
+        console.log('Login successful:', data);
+        navigation.navigate('Home');
+    } catch (error) {
+        console.error('Login failed:', error);
+        Alert.alert("Login Failed", error.response?.data?.msg || "An unexpected error occurred");
+    }
   };
+
 
   return (
     <View style={styles.container}>
