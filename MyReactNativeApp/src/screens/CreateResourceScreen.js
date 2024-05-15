@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
-import { createStudent } from '../api/api'; // Ensure path is correct
+import { createStudent } from '../api/api'; 
 
 const CreateStudentScreen = ({ navigation }) => {
   const [name, setName] = useState('');

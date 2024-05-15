@@ -22,7 +22,7 @@ export const deleteStudent = (id) => api.delete(`/students/${id}`);
 export const fetchLecturers = async () => {
   try {
     const response = await api.get('/lecturers');
-    return response.data; // Ensure you're returning only the data part of the response
+    return response.data;
   } catch (error) {
     console.error('Error fetching lecturers:', error);
     return []; // Return an empty array in case of error
@@ -37,7 +37,7 @@ export const deleteLecturer = (id) => api.delete(`/lecturers/${id}`);
 export const fetchModules = async () => {
   try {
     const response = await api.get('/modules');
-    return response.data; // Ensure you're returning only the data part of the response
+    return response.data;
   } catch (error) {
     console.error('Error fetching modules:', error);
     return []; // Return an empty array in case of error
