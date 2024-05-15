@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, StyleSheet } from 'react-native';
-import { fetchStudents } from '../api/api';
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 const LandingPage = ({ navigation }) => {
-  const [loading, setLoading] = useState(true);
-  const [students, setStudents] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    fetchStudents().then(data => {
-      setStudents(data);
-      setLoading(false);
-    }).catch(err => {
-      setError('Failed to connect to backend: ' + err.message);
-      setLoading(false);
-    });
-  }, []);
-
   return (
     <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator size="large" />
-      ) : error ? (
-        <Text style={styles.error}>{error}</Text>
-      ) : (
-        <Text style={styles.success}>Fetched {students.length} students successfully!</Text>
-      )}
-      {/* For adding navigation buttons or other content here */}
+      <Text style={styles.title}>Welcome to My App!</Text>
+      <Text style={styles.subtitle}>Get started by logging in or signing up.</Text>
+
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Log In"
+          onPress={() => navigation.navigate('Login')}
+          color="#007BFF"  // Primary button color
+        />
+        <View style={styles.space} />
+        <Button
+          title="Sign Up"
+          onPress={() => navigation.navigate('SignUp')}
+          color="#28A745"  // Secondary button color
+        />
+      </View>
     </View>
   );
 };
@@ -36,14 +29,29 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F5F5F5',  
+    padding: 20,
   },
-  error: {
-    color: 'red',
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
-  success: {
-    color: 'green',
+  subtitle: {
+    fontSize: 16,
+    color: '#666',  
+    marginBottom: 20,
+  },
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  space: {
+    width: 20,  
   }
 });
 
 export default LandingPage;
+
 
