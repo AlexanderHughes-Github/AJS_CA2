@@ -4,6 +4,19 @@ const api = axios.create({
   baseURL: 'http://192.168.5.227:3000/api',
 });
 
+API.interceptors.request.use(
+  async (config) => {
+    const token = await getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  error => Promise.reject(error)
+);
+
+
+
 // Students
 export const fetchStudents = async () => {
   try {
