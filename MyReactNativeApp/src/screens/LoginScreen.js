@@ -12,7 +12,7 @@ const LoginScreen = ({ navigation }) => {
     try {
         const data = await login({ email, password });
         console.log('Login successful:', data);
-        navigation.navigate('Home');
+        navigation.navigate('Landing');
     } catch (error) {
         console.error('Login failed:', error);
         Alert.alert("Login Failed", error.response?.data?.msg || "An unexpected error occurred");
