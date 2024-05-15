@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import API from '../api/api'; // Assuming API is set up with Axios and includes the bearer token
+import API from '../api/api';
 
 const EditResourceScreen = ({ route, navigation }) => {
   const { itemDetails } = route.params;
-  const [name, setName] = useState(itemDetails.name);  // Assume 'name' is part of your resource schema
+  const [name, setName] = useState(itemDetails.name);
 
   const handleSave = async () => {
     try {
-      // Assuming your API requires an ID and updates are done via PUT
-      // Adjust this URL and payload according to your actual API endpoints and requirements
       const response = await API.put(`/resources/${itemDetails.id}`, { name });
       Alert.alert('Success', 'Resource updated successfully');
       navigation.goBack(); // Navigate back after success

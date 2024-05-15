@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import API from '../api/api'; // Import your configured API client
+import API from '../api/api';
 
 const ResourceListScreen = ({ navigation }) => {
   const [resources, setResources] = useState([]);
@@ -8,7 +8,7 @@ const ResourceListScreen = ({ navigation }) => {
   useEffect(() => {
     const fetchResources = async () => {
       try {
-        const response = await API.get('/resources'); // Adjust this endpoint according to your actual API
+        const response = await API.get('/resources');
         setResources(response.data);
       } catch (error) {
         console.error('Error fetching resources', error);

@@ -6,7 +6,7 @@ const CreateResourceScreen = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await API.post('/resources', { name }); // Adjust with correct data
+      const response = await API.post('/resources', { name });
       // Handle response or navigate
     } catch (error) {
       console.log('Error creating resource', error);

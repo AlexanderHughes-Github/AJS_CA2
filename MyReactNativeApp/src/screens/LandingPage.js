@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet, ScrollView } from 'react-native';
-import { fetchStudents } from '../api/api'; // Ensure path correctness
+import { fetchStudents } from '../api/api';
 
 const LandingPage = ({ navigation }) => {
   const [students, setStudents] = useState([]);
