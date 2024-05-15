@@ -19,14 +19,30 @@ export const updateStudent = (id, student) => api.put(`/students/${id}`, student
 export const deleteStudent = (id) => api.delete(`/students/${id}`);
 
 // Lecturers
-export const fetchLecturers = () => api.get('/lecturers');
+export const fetchLecturers = async () => {
+  try {
+    const response = await api.get('/lecturers');
+    return response.data; // Ensure you're returning only the data part of the response
+  } catch (error) {
+    console.error('Error fetching lecturers:', error);
+    return []; // Return an empty array in case of error
+  }
+};
 export const fetchLecturer = (id) => api.get(`/lecturers/${id}`);
 export const createLecturer = (lecturer) => api.post('/lecturers', lecturer);
 export const updateLecturer = (id, lecturer) => api.put(`/lecturers/${id}`, lecturer);
 export const deleteLecturer = (id) => api.delete(`/lecturers/${id}`);
 
 // Modules
-export const fetchModules = () => api.get('/modules');
+export const fetchModules = async () => {
+  try {
+    const response = await api.get('/modules');
+    return response.data; // Ensure you're returning only the data part of the response
+  } catch (error) {
+    console.error('Error fetching modules:', error);
+    return []; // Return an empty array in case of error
+  }
+};
 export const fetchModule = (id) => api.get(`/modules/${id}`);
 export const createModule = (module) => api.post('/modules', module);
 export const updateModule = (id, module) => api.put(`/modules/${id}`, module);
